@@ -5,7 +5,12 @@ import Button from "components/Button";
 export default function Form(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  
+
+  const reset = () => {
+    setName("");
+    setInterviewer(null);
+  };
+
   const cancel = () => {
     reset();
     props.onCancel();
@@ -13,11 +18,6 @@ export default function Form(props) {
 
   const save = () => {
     props.onSave(name, interviewer);
-  };
-
-  const reset = () => {
-    setName("");
-    setInterviewer(null);
   };
 
   return (
@@ -31,7 +31,7 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             /*
-            This must be a controlled component
+              This must be a controlled component
             */
           />
         </form>
