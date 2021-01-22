@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DayList from "components/DayList.js"
 
-import "components/Appointment";
+import Appointment from "components/Appointment/index";
 import "components/Application.scss";
 
 const appointments = [
@@ -107,7 +107,9 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {appointments.map(appointment => {
+          return <Appointment key={appointment.id} {...appointment} />;
+        })}
       </section>
     </main>
       );
