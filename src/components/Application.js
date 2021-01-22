@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import DayList from "components/DayList.js"
 
 import Appointment from "components/Appointment/index";
@@ -80,7 +82,9 @@ const days = [
 
 
 export default function Application(props) {
-  const [day, setDay] = useState("Monday");
+  const [day, setDay] = useState([]);
+
+  useEffect(() => axios.get("/api/days"))
 
   return (
     <main className="layout">
