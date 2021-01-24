@@ -6,7 +6,6 @@ import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 
 export default function Appointment(props) {
-  console.log(props);
   return (
     <>
       <Header time={props.time} />
