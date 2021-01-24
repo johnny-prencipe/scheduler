@@ -12,11 +12,10 @@ function getAppointmentsForDay(state, day) {
 };
 
 function getInterview(state, interview) {
-  if (!interview) {
-    return null;
-  }
   const returnObj = {};
-  for (const id in state.interviewers) {
+  if (!interview) return null;
+  
+  for (let id in state.interviewers) {
     if (interview.interviewer === state.interviewers[id].id) {
       returnObj.student = interview.student;
       returnObj.interviewer = state.interviewers[id];
