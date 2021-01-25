@@ -53,8 +53,16 @@ export default function Appointment(props) {
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch((error) => transition(ERROR_DELETE, true));
+      .catch(error => transition(ERROR_DELETE, true));
   }
+  console.log('props.interview:', props.interview);
+
+
+  const interviewer = props.interview ? props.allInterviewers[props.interview.interviewer].name : null;
+
+
+  console.log('index.js props', props);
+
   return (
     <article className="appointment">
       <Header time={props.time} id={props.id} />
@@ -62,7 +70,7 @@ export default function Appointment(props) {
       {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={interviewer}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
