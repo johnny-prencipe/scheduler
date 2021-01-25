@@ -1,4 +1,4 @@
-function getAppointmentsForDay(state, day) {
+const getAppointmentsForDay = (state, day) => {
   const appointments = [];
   
   state.days.forEach(appointment => {
@@ -11,7 +11,7 @@ function getAppointmentsForDay(state, day) {
   return appointments;
 };
 
-function getInterview(state, interview) {
+const getInterview = (state, interview) => {
   const returnObj = {};
   if (!interview) return null;
   
@@ -25,4 +25,18 @@ function getInterview(state, interview) {
   return returnObj;
 }
 
-export { getAppointmentsForDay, getInterview };
+const getInterviewersForDay = (state, day) => {
+  const interviewers = [];
+
+  state.days.forEach(interviewer => {
+    if (interviewer.name === day) {
+      for (const id of interviewer.interviewers) {
+        interviewers.push(state.interviewers[id]);
+      }
+    }
+  });
+
+  return interviewers;
+};
+
+export { getAppointmentsForDay, getInterview, getInterviewersForDay };
