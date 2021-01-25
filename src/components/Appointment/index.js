@@ -34,7 +34,6 @@ export default function Appointment(props) {
     }
   }, [transition, mode, props.interview]);
 
-  // SAVE appointment
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -43,8 +42,8 @@ export default function Appointment(props) {
 
     transition(SAVING);
     props.bookInterview(props.id, interview)
-      // .then(() => transition(SHOW))
-      // .catch(error => transition(ERROR_SAVE, true));
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
   }
 
   // DELETE appointment
@@ -58,8 +57,10 @@ export default function Appointment(props) {
   console.log('props.interview:', props.interview);
 
 
-  const interviewer = props.interview ? props.allInterviewers[props.interview.interviewer].name : null;
+  // const interviewer = props.interview ? props.allInterviewers[props.interview.interviewer].name : null;
 
+  //TODO: Show the proper name instead of number.
+  //Currently crashes when uploading a new post.
 
   console.log('index.js props', props);
 
@@ -70,7 +71,7 @@ export default function Appointment(props) {
       {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
-          interviewer={interviewer}
+          interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
