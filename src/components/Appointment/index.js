@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "components/Appointment/styles.scss";
 
 import useVisualMode from "hooks/useVisualMode"
+import { getInterviewersForDay } from "helpers/selectors"
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
@@ -10,8 +11,8 @@ import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
 
-
 export default function Appointment(props) {
+  console.log('Appointment props:', props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -46,23 +47,22 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
   }
 
-  // DELETE appointment
-  function destroy(event) {
+
+
+  function remove(event) {
     transition(DELETE, true);
     props
-      .cancelInterview(props.id)
+      .onDelete(props.id)
       .then(() => transition(EMPTY))
-      .catch(error => transition(ERROR_DELETE, true));
+      .catch(() => transition(ERROR_DELETE, true));
   }
-  console.log('props.interview:', props.interview);
 
-
-  // const interviewer = props.interview ? props.allInterviewers[props.interview.interviewer].name : null;
+  
 
   //TODO: Show the proper name instead of number.
   //Currently crashes when uploading a new post.
 
-  console.log('index.js props', props);
+  const interviewer = props.interview ? props.interviewers[props.interview.interviewer].name : null;
 
   return (
     <article className="appointment">
@@ -71,14 +71,14 @@ export default function Appointment(props) {
       {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          interviewer={interviewer}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
         <Form onSave={save}
-        interviewers={props.interviewers}
+        interviewers={props.dayInterviewers}
         onCancel={back}
         />
       )}
@@ -88,8 +88,8 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
           onCancel={back}
-          onConfirm={destroy}
-          message={"Are you sure you would like to delete?"}
+          onConfirm={remove}
+          message={"Are you sure?"}
         />
       )}
 
@@ -97,7 +97,7 @@ export default function Appointment(props) {
 
       {mode === EDIT && (
         <Form
-          interviewers={props.interviewers}
+          interviewers={ props.dayInterviewers }
           onSave={save}
           onCancel={() => transition(SHOW)}
           name={props.interview.student}
