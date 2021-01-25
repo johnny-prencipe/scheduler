@@ -12,7 +12,6 @@ import Error from "components/Appointment/Error";
 
 
 export default function Appointment(props) {
-  // MODE VARIABLES
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -39,13 +38,13 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer,
+      interviewer
     };
+
     transition(SAVING);
-    props
-      .bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch((error) => transition(ERROR_SAVE, true));
+    props.bookInterview(props.id, interview)
+      // .then(() => transition(SHOW))
+      // .catch(error => transition(ERROR_SAVE, true));
   }
 
   // DELETE appointment
