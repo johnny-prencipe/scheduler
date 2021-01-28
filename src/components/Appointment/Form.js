@@ -5,8 +5,10 @@ import Button from "components/Button";
 export default function Form(props) {
   console.log('Form.js Props:', props);
   console.log('Form.js props.interviewers:', props.interviewers);
-  const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [ name, setName ] = useState(props.name || "");
+  const [ interviewer, setInterviewer ] = useState(props.interviewer || null);
+
+  const [ errorMessage, setErrorMessage ] = useState("")
 
   const reset = () => {
     setName("");
@@ -19,7 +21,11 @@ export default function Form(props) {
   };
 
   const save = () => {
-    props.onSave(name, interviewer);
+    if (name && interviewer) {
+      props.onSave(name, interviewer);
+    } else {
+      setErrorMessage('Invalid params: Name or interviewer cannot be blank.')
+    }
   };
 
   return (
@@ -39,6 +45,7 @@ export default function Form(props) {
             */
           />
         </form>
+        <p className="appointment__validation">{errorMessage}</p>
         <InterviewerList
           interviewers={props.interviewers}
           interviewer={interviewer}
