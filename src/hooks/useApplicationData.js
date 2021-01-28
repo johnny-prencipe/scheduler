@@ -7,7 +7,6 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
-    // 
     appointments: {},
     interviewers: {}
   })
@@ -18,7 +17,7 @@ export default function useApplicationData() {
       axios.get("/api/days/"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers")
-    ]).then((all) => {  
+    ]).then(all => {  
       const [days, appointments, interviewers] = all;
       setState(prev => ({...prev, days: days.data, appointments: appointments.data, interviewers: interviewers.data}))
     });
@@ -55,7 +54,6 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`)
     .then(() => {
-      console.log(state);
       setState(prev => ({...prev, appointments}))
       axios.get("/api/days")
       .then(days => {

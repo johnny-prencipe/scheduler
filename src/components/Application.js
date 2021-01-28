@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 
-//Component imports
 import "components/Application.scss";
 import DayList from "./DayList"
-import Appointment from "components/Appointment/index"
 import useApplicationData from "../hooks/useApplicationData"
+import Appointment from "components/Appointment/index"
 import { getAppointmentsForDay, getInterviewersForDay } from "../helpers/selectors"
 
 export default function Application(props) {
@@ -57,11 +56,10 @@ export default function Application(props) {
         src="images/lhl.png"
         alt="Lighthouse Labs"
       />
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
         {schedule}
-        <Appointment key={'last'} time={'5pm'} />
+        <Appointment key={'last'} time={'5pm'} interviewers={state.interviewers} />
       </section>
 
     </main>

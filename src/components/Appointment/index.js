@@ -36,6 +36,10 @@ export default function Appointment(props) {
   }, [transition, mode, props.interview]);
 
   function save(name, interviewer) {
+    if (!interviewer) {
+      return null;
+    }
+
     const interview = {
       student: name,
       interviewer
@@ -47,8 +51,6 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
   }
 
-
-
   function remove(event) {
     transition(DELETE, true);
     props
@@ -57,12 +59,8 @@ export default function Appointment(props) {
       .catch(() => transition(ERROR_DELETE, true));
   }
 
-  
-
-  //TODO: Show the proper name instead of number.
-  //Currently crashes when uploading a new post.
-
   const interviewer = props.interview ? props.interviewers[props.interview.interviewer].name : null;
+  console.log('index.js props:', props);
 
   return (
     <article className="appointment">
@@ -97,7 +95,7 @@ export default function Appointment(props) {
 
       {mode === EDIT && (
         <Form
-          interviewers={ props.dayInterviewers }
+          interviewers={props.dayInterviewers}
           onSave={save}
           onCancel={() => transition(SHOW)}
           name={props.interview.student}
