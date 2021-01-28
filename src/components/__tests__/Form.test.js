@@ -62,15 +62,17 @@ it("calls onSave function when the name is defined", () => {
     onSave={onSave}
     />
     );
-    /* 3. Click the save button */
-    fireEvent.click(getByText("Save"));
-  /* 3. validation is not shown */  
+
+  /* 3. Click the save button */
+  fireEvent.click(getByText("Save"));
+
+  /* 4. validation is not shown */  
   expect(queryByText(/Invalid params/i)).toBeNull();
 
-  /* 4. onSave is called once*/
+  /* 5. onSave is called once*/
   expect(onSave).toHaveBeenCalledTimes(1);
 
-  /* 5. onSave is called with the correct arguments */
+  /* 6. onSave is called with the correct arguments */
   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", "1");
 
   });
