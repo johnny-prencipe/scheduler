@@ -14,7 +14,7 @@ const getAppointmentsForDay = (state, day) => {
 const getInterview = (state, interview) => {
   const returnObj = {};
   if (!interview) return null;
-  
+
   for (let id in state.interviewers) {
     if (interview.interviewer === state.interviewers[id].id) {
       returnObj.student = interview.student;
