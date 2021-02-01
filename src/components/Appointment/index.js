@@ -12,7 +12,6 @@ import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
 
 export default function Appointment(props) {
-  console.log('Appointment props:', props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -60,7 +59,6 @@ export default function Appointment(props) {
   }
 
   const interviewer = props.interview ? props.interviewers[props.interview.interviewer].name : null;
-  console.log('index.js props:', props);
 
   return (
     <article className="appointment">

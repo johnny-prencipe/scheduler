@@ -15,8 +15,6 @@ export default function Application(props) {
     deleteAppointment,
   } = useApplicationData()
 
-  console.log('state: ', state)
-
   const dayInterviewers = getInterviewersForDay(state, state.day)
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
