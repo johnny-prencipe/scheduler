@@ -21,7 +21,7 @@ export default function Form(props) {
   };
 
   const save = () => {
-    if (name && interviewer) {
+    if (name) {
       props.onSave(name, interviewer);
     } else {
       setErrorMessage('Invalid params: Name or interviewer cannot be blank.')
