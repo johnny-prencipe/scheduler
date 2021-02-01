@@ -54,29 +54,63 @@ const fixtures = {
 };
 
 export default {
-  defaults: { baseURL: "" },
-  get: jest.fn(url => {
-    if (url === "/api/days") {
+  defaults: { baseURL: '' },
+  get: jest.fn(url=> {
+    if(url === "/api/days") {
       return Promise.resolve({
         status: 200,
         statusText: "OK",
         data: fixtures.days
-      });
+      })
     }
-
-    if (url === "/api/appointments") {
+    if (url === '/api/appointments') {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
         data: fixtures.appointments
       })
     }
-
-    if (url === "/api/interviewers") {
+    if (url === '/api/interviewers') {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
         data: fixtures.interviewers
+      })
+    }
+  }),
+  put: jest.fn((url, data) => {
+    const sectioned = url.split('/')
+    const endURL = sectioned[sectioned.length - 1]
+    if (url === '/api/days') {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
+      }) 
+    }
+    if (url === `/api/appointments/${endURL}`) {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
+      })
+    }
+    if (url === '/api/interviewers') {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: '' 
+      })
+    }
+  }),
+  delete: jest.fn(url => {
+    const sectioned = url.split('/')
+    const endURL = sectioned[sectioned.length - 1]
+    if (url === `/api/appointments/${endURL}`) {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
       })
     }
   })
