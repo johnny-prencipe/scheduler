@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+![Showcase](https://github.com/johnny-prencipe/scheduler/blob/master/media/showcase.gif)
+
 ## Setup
 
 Install dependencies with `npm install`.
